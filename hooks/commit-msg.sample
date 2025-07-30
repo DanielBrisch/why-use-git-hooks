@@ -1,0 +1,11 @@
+#!/bin/sh
+commit_msg_file=$1
+commit_message=$(cat "$commit_msg_file")
+
+pattern="^(feat|fix|docs|style|refactor|test|chore)\: .+"
+if ! echo "$commit_message" | grep -qE "$pattern"; then
+    echo "❌ Invalid commit message!"
+    echo "Valid options: feat|fix|docs|style|refactor|test|chore"
+    exit 1
+fi
+

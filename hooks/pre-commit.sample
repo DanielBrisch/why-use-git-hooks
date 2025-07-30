@@ -1,0 +1,20 @@
+#!/bin/sh
+go fmt ./...
+if [ $? -ne 0 ]; then
+    echo "❌ Error on code format"
+    exit 1
+fi
+
+golangci-lint run
+if [ $? -ne 0 ]; then
+    echo "❌ Linter find problems"
+    exit 1
+fi
+
+go test ./...
+if [ $? -ne 0 ]; then
+    echo "❌ Tests failed. Commit blocked!"
+    exit 1
+fi
+
+echo "Approved commit!"

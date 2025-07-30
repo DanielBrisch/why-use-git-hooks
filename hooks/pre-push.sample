@@ -1,0 +1,8 @@
+#!/bin/sh
+go test ./...
+if [ $? -ne 0 ]; then
+    echo "❌ Failed testes, blocked commit!"
+    exit 1
+fi
+
+echo "Autorized push!"
